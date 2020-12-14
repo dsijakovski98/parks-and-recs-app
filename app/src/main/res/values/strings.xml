@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">Parks &amp; Recs</string>
+
+    <!--    TOOLBARS-->
+    <string name="main_toolbar_title">Welcome</string>
+    <string name="cities_toolbar_title">Cities</string>
+    <string name="make_reservation_toolbar_title">Make Reservation</string>
+
+    <string name="my_reservations">My Reservations</string>
+    <string name="log_out">Log out</string>
+
+
+    <!--    TITLES-->
+    <string name="register_form_title1">Create an account and join</string>
+    <string name="register_form_title2">Parks &amp; Recs</string>
+    <string name="login_form_title1">Need a parking spot, huh?</string>
+    <string name="login_form_title2">Log in and find one!</string>
+    <string name="cities_title">Select a city</string>
+    <string name="reservation_form_title">Select your parking spot in</string>
+
+    <!--    FORM HINTS-->
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="password_confirm_hint">Confirm Password</string>
+    <string name="email_hint">Email</string>
+    <string name="date_hint">MM/DD/YYYY</string>
+
+    <string name="img_description">This is an image</string>
+    <string name="title_activity_cities">CitiesActivity</string>
+
+
+    <!--    BUTTONS-->
+    <string name="register_btn">Register</string>
+    <string name="login_btn">Log in</string>
+    <string name="open_city_parking_lots_btn">Open</string>
+    <string name="create_reservation_btn">Reserve</string>
+    <string name="make_reservation_btn">Make reservation</string>
+
+
+    <!--    OTHER-->
+    <string name="empty_field"> </string>
+    <string name="parking_lots">Total parking lots: </string>
+    <string name="parking_spots_text">Capacity: </string>
+    <string name="parking_lot_available">Available</string>
+    <string name="parking_lot_unavailable">Full</string>
+    <string name="date_text">Date: </string>
+    <string name="time_text">Time: </string>
+    <string name="enter_username">Enter a username!</string>
+    <string name="enter_password">Enter a password!</string>
+    <string name="short_username">Username must have at least 4 characters!</string>
+    <string name="short_password">Password must have at least 6 characters!</string>
+    <string name="passwords_not_matching">Passwords don\'t match!</string>
+    <string name="enter_date">Enter a date!</string>
+    <string name="invalid_date">Invalid date format!</string>
+    <string name="past_time_date">Date can\'t be in the past!</string>
+
+
+    <string-array name="time_slots">
+        <item>00:00</item>
+        <item>01:00</item>
+        <item>02:00</item>
+        <item>03:00</item>
+        <item>04:00</item>
+        <item>05:00</item>
+        <item>06:00</item>
+        <item>07:00</item>
+        <item>08:00</item>
+        <item>09:00</item>
+        <item>10:00</item>
+        <item>11:00</item>
+        <item>12:00</item>
+        <item>13:00</item>
+        <item>14:00</item>
+        <item>15:00</item>
+        <item>16:00</item>
+        <item>17:00</item>
+        <item>18:00</item>
+        <item>19:00</item>
+        <item>20:00</item>
+        <item>21:00</item>
+        <item>22:00</item>
+        <item>23:00</item>
+    </string-array>
+
+</resources>

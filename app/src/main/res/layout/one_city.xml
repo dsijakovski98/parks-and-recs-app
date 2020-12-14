@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/city_layout">
+
+    <ImageView
+        android:id="@+id/ivh_city_img"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/img_description"
+        android:src="@mipmap/ic_city_avatar_bg_foreground"
+        app:layout_constraintBottom_toBottomOf="@+id/bvh_view_parking_lots"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bvh_view_parking_lots" />
+
+    <TextView
+        android:id="@+id/tvh_city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@+id/ivh_city_img"
+        app:layout_constraintTop_toTopOf="@+id/bvh_view_parking_lots" />
+
+    <TextView
+        android:id="@+id/parking_lots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parking_lots"
+        android:textSize="15sp"
+        android:textColor="#1B1B1B"
+        app:layout_constraintStart_toStartOf="@+id/tvh_city_name"
+        app:layout_constraintTop_toBottomOf="@+id/tvh_city_name" />
+
+    <TextView
+        android:id="@+id/tvh_number_parking_lots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/parking_lots"
+        app:layout_constraintStart_toEndOf="@+id/parking_lots" />
+
+    <TextView
+        android:id="@+id/tvh_city_achronim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SK"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textColor="@color/cardview_light_background"
+        android:shadowColor="@color/black"
+        android:textStyle="bold"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="@+id/ivh_city_img"
+        app:layout_constraintEnd_toEndOf="@+id/ivh_city_img"
+        app:layout_constraintStart_toStartOf="@+id/ivh_city_img"
+        app:layout_constraintTop_toTopOf="@+id/ivh_city_img" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/bvh_view_parking_lots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/purple_500"
+        android:src="@drawable/ic_open_parking_lots"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
