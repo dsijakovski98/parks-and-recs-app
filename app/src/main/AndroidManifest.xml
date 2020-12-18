@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_splash_screen_2_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ConfirmReservationActivity"></activity>
         <activity android:name=".MakeReservationActivity" />
         <activity android:name=".CitiesActivity" />
         <activity android:name=".LoginRegisterActivity" />

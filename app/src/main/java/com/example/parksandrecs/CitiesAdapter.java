@@ -6,7 +6,6 @@ import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,16 +60,12 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         else {
 
             holder.openParkingLotsBtn.setOnClickListener(v -> {
-                    String selectedCityName = citiesList.get(position).getCityName();
-                    Intent goToReservationForm = new Intent(context, MakeReservationActivity.class);
-                    goToReservationForm.putExtra("city_name", selectedCityName);
-                    context.startActivity(goToReservationForm);
+                String selectedCityName = citiesList.get(position).getCityName();
 
-                    // PARKING LOTS FRAGMENT CODE - Save for later
-//                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
-//                    ParkingsFragment parkingsFragment =
-//                            new ParkingsFragment(selectedCityName, createParkingLotsList(selectedCityName));
-//                    parkingsFragment.show(activity.getSupportFragmentManager(), "Parking dialog Fragment");
+                Intent goToReservationForm = new Intent(context, MakeReservationActivity.class);
+                goToReservationForm.putExtra("city_name", selectedCityName);
+
+                context.startActivity(goToReservationForm);
         });
         }
     }
@@ -79,19 +74,6 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
     public int getItemCount() {
         return citiesList.size();
     }
-
-    // TODO: Get this data from database
-    // TEST FUNCTION
-//    private List<Parking> createParkingLotsList(String cityName) {
-//        List<Parking> parkingLotsList = new ArrayList<>();
-//
-//        for(int i = 0; i < 10; i++) {
-//            parkingLotsList.add((new Parking(cityName + " " + i, -1, 10)));
-//        }
-//
-//        return parkingLotsList;
-//    }
-
 
 
     public static class CitiesViewHolder extends RecyclerView.ViewHolder {

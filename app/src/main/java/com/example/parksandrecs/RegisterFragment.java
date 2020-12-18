@@ -89,6 +89,7 @@ public class RegisterFragment extends Fragment {
 
         // TODO: Implement database
         // Check for existing fields
+        // if username already exists, set error message
 
         // =============================================================
 

@@ -19,14 +19,18 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class MakeReservationActivity extends AppCompatActivity {
 
     EditText dateInput;
     Spinner timeSlotsSpinner;
     TextView errorMessage;
+
+    String selectedCityName;
 
     private final String DATE_FORMAT = "MM/dd/YYYY";
 
@@ -36,9 +40,9 @@ public class MakeReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_make_reservation);
 
         Intent makeReservationIntent = getIntent();
-        String cityName = makeReservationIntent.getStringExtra("city_name");
+        selectedCityName = makeReservationIntent.getStringExtra("city_name");
         TextView cityNameTv = findViewById(R.id.reservation_city_name);
-        cityNameTv.setText(cityName);
+        cityNameTv.setText(selectedCityName);
 
         // Setup toolbar
         Toolbar mainToolbar = findViewById(R.id.make_reservation_toolbar);
@@ -77,6 +81,7 @@ public class MakeReservationActivity extends AppCompatActivity {
 
     private void validateReservation() throws ParseException {
         String date = dateInput.getText().toString();
+        String time = timeSlotsSpinner.getSelectedItem().toString();
 
         // Empty fields
         if(date.equals("")) {
@@ -95,12 +100,15 @@ public class MakeReservationActivity extends AppCompatActivity {
         // 2. Compare Dates
 
         // TODO: Implement database
-        // 1. Check date availability
-        // 2. Check time availability
+        // Check time availability
 
         // Valid reservation at this point
         errorMessage.setText(R.string.empty_field);
-        Toast.makeText(this, "Making Reservation...", Toast.LENGTH_SHORT).show();
+
+        String reservationInfo = "Date: " + date + "\n" + "Time: " + time;
+        Toast.makeText(this, "Making Reservation...:\n" + reservationInfo, Toast.LENGTH_SHORT).show();
+
+        openParkingLotsFragment(date, time);
     }
 
     private void errorInput(EditText input, int errorCode) {
@@ -119,6 +127,30 @@ public class MakeReservationActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void openParkingLotsFragment(String date, String time) {
+        // TODO: Get available parking spots from database
+        // TODO: Change name of function to getAvailableLots(city)
+
+        List<ParkingLot> availableParkingSpotsList = createParkingLotsList(selectedCityName);
+
+        // PARKING LOTS FRAGMENT CODE
+        AppCompatActivity activity = (AppCompatActivity) MakeReservationActivity.this;
+            ParkingsFragment parkingsFragment =
+                    new ParkingsFragment(selectedCityName, date, time, availableParkingSpotsList);
+            parkingsFragment.show(activity.getSupportFragmentManager(), "Parking dialog Fragment");
+    }
+
+    // TEST FUNCTION
+    private List<ParkingLot> createParkingLotsList(String cityName) {
+        List<ParkingLot> parkingLotsList = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++) {
+            parkingLotsList.add((new ParkingLot(cityName + " " + i, -1, 10)));
+        }
+
+        return parkingLotsList;
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

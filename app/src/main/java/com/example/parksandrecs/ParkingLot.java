@@ -1,14 +1,14 @@
 package com.example.parksandrecs;
 
-public class Parking {
+public class ParkingLot {
     private String parkingName;
     private int parkingId;
-    private int numSpots;
+    private int capacity;
 
-    public Parking(String parkingName, int parkingId, int numSpots) {
+    public ParkingLot(String parkingName, int parkingId, int capacity) {
         this.parkingName = parkingName;
         this.parkingId = parkingId;
-        this.numSpots = numSpots;
+        this.capacity = capacity;
     }
 
     public String getParkingName() {
@@ -27,11 +27,11 @@ public class Parking {
         this.parkingId = parkingId;
     }
 
-    public int getNumSpots() {
-        return numSpots;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setNumSpots(int numSpots) {
-        this.numSpots = numSpots;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }

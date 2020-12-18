@@ -7,28 +7,27 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
 public class ParkingsFragment extends DialogFragment {
     String cityName;
-    List<Parking> parkingLotsList;
+    String date;
+    String time;
+    List<ParkingLot> parkingLotsList;
 
-    public ParkingsFragment(String cityName, List<Parking> parkingLotsList) {
+    public ParkingsFragment(String cityName, String date, String time, List<ParkingLot> parkingLotsList) {
         // Required empty public constructor
         this.cityName = cityName;
+        this.date = date;
+        this.time = time;
         this.parkingLotsList = parkingLotsList;
     }
 
@@ -56,8 +55,6 @@ public class ParkingsFragment extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        Log.i("TAGG", getActivity().toString());
-
         // Get the recycler view object
         RecyclerView parkingLotsRecyclerView = getDialog().findViewById(R.id.rv_parking_lots);
         parkingLotsRecyclerView.hasFixedSize();
@@ -69,7 +66,7 @@ public class ParkingsFragment extends DialogFragment {
 
         // Set the adapter
         ParkingLotsAdapter parkingLotsRecyclerViewAdapter =
-                new ParkingLotsAdapter(parkingLotsList, getActivity());
+                new ParkingLotsAdapter(parkingLotsList, date, time, getActivity());
         parkingLotsRecyclerView.setAdapter(parkingLotsRecyclerViewAdapter);
 
 

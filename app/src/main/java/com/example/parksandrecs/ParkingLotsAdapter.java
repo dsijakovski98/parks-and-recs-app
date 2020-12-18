@@ -1,25 +1,35 @@
 package com.example.parksandrecs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.ParkingLotsViewHolder> {
-    List<Parking> parkingLotsList;
+    List<ParkingLot> parkingLotsList;
+    String date;
+    String time;
     Context context;
 
-    public ParkingLotsAdapter(List<Parking> parkingLotsList, Context context) {
+    public ParkingLotsAdapter(List<ParkingLot> parkingLotsList, String date, String time, Context context) {
         this.parkingLotsList = parkingLotsList;
+        this.date = date;
+        this.time = time;
         this.context = context;
     }
 
@@ -35,43 +45,49 @@ public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.
     @Override
     public void onBindViewHolder(@NonNull ParkingLotsAdapter.ParkingLotsViewHolder holder, int position) {
 
-        Parking currentParking = parkingLotsList.get(position);
-//
-//        // Assign the data to the views
+        ParkingLot currentParking = parkingLotsList.get(position);
+         // Assign the data to the views
         holder.parkingLotName.setText(currentParking.getParkingName());
-//
-        String status;
-        if(currentParking.getNumSpots() <= 0) {
-//            // Full parking
-            status = context.getResources().getString(R.string.parking_lot_unavailable);
-            holder.parkingLotStatus.setTextColor(context.getResources().getColor(R.color.parking_lot_closed));
+
+        int lotCapacity = currentParking.getCapacity();
+
+        // TODO: Calculate open and taken spots
+        // For now, hard code them
+        int takenSpots = 6; // TODO: getNumberOfTakenSpots(city, parkingLot, date, time)
+        int openSpots = lotCapacity - takenSpots;
+
+        if(openSpots == 0) {
+            // Full parking
 
             holder.parkingLotIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_parking_lot_closed_icon));
 
             holder.makeReservationBtn.setBackgroundColor(context.getResources().getColor(R.color.light_gray));
             holder.makeReservationBtn.setClickable(false);
         }
+
+
         else {
             // Available parking
-            status = context.getResources().getString(R.string.parking_lot_available);
-            holder.parkingLotStatus.setTextColor(context.getResources().getColor(R.color.parking_lot_open));
 
             holder.parkingLotIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_parking_lot_open_icon));
 
             holder.makeReservationBtn.setOnClickListener(v -> {
-                Intent makeReservationIntent = new Intent(context, MakeReservationActivity.class);
-                // TODO: Pass data about parking lot
-                makeReservationIntent.putExtra("city_name", currentParking.getParkingName());
-                context.startActivity(makeReservationIntent);
+                // Go to confirm reservation activity
+                Toast.makeText(context, "Going to ConfirmReservation activity...", Toast.LENGTH_SHORT).show();
+
+                Intent goToConfirmReservationIntent = new Intent(context, ConfirmReservationActivity.class);
+
+                goToConfirmReservationIntent.putExtra("city_name", currentParking.getParkingName());
+                goToConfirmReservationIntent.putExtra("reservation_date", date);
+                goToConfirmReservationIntent.putExtra("reservation_time", time);
+
+                context.startActivity(goToConfirmReservationIntent);
+                ((Activity)context).finish();
             });
-
-
         }
-        holder.parkingLotStatus.setText(status);
-//
-        holder.parkingLotNumSpots.setText(String.valueOf(currentParking.getNumSpots()));
-//        Log.i("TAGG", holder.parkingLotNumSpots.toString());
-//
+
+        holder.parkingLotTakenSpots.setText(String.valueOf(takenSpots));
+        holder.parkingLotOpenSpots.setText(String.valueOf(openSpots));
 
     }
 
@@ -84,8 +100,8 @@ public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.
 
         ImageView parkingLotIcon;
         TextView parkingLotName;
-        TextView parkingLotNumSpots;
-        TextView parkingLotStatus;
+        TextView parkingLotTakenSpots;
+        TextView parkingLotOpenSpots;
         ImageView makeReservationBtn;
 
         public ParkingLotsViewHolder(@NonNull View itemView) {
@@ -93,8 +109,10 @@ public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.
 
             this.parkingLotIcon = itemView.findViewById(R.id.ivh_parking_lot_icon);
             this.parkingLotName = itemView.findViewById(R.id.tvh_parking_name);
-            this.parkingLotNumSpots = itemView.findViewById(R.id.tvh_parking_spots_open);
-            this.parkingLotStatus = itemView.findViewById(R.id.tvh_parking_lot_status);
+
+            this.parkingLotTakenSpots = itemView.findViewById(R.id.tvh_parking_spots_taken);
+            this.parkingLotOpenSpots = itemView.findViewById(R.id.tvh_parking_spots_open);
+
             this.makeReservationBtn = itemView.findViewById(R.id.bvh_make_reservation);
         }
     }

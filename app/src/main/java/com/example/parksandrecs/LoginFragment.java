@@ -70,6 +70,8 @@ public class LoginFragment extends Fragment {
 
         // TODO: Implement database
         // Check for existing input
+        // if username exists
+        // and if password is correct, sign user in
 
         // =============================================================
 

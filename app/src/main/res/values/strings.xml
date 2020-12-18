@@ -16,7 +16,7 @@
     <string name="login_form_title1">Need a parking spot, huh?</string>
     <string name="login_form_title2">Log in and find one!</string>
     <string name="cities_title">Select a city</string>
-    <string name="reservation_form_title">Select your parking spot in</string>
+    <string name="reservation_form_title">Set a time and date in</string>
 
     <!--    FORM HINTS-->
     <string name="username_hint">Username</string>
