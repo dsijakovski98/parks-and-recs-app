@@ -18,10 +18,15 @@ public class ConfirmReservationActivity extends AppCompatActivity {
     String confirmDate;
     String confirmTime;
 
+    String parkingLongitude;
+    String parkingLatitude;
+
     TextView reservedCity;
     TextView reservedLot;
     TextView reservedDate;
     TextView reservedTime;
+
+    int parkingLotId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,11 @@ public class ConfirmReservationActivity extends AppCompatActivity {
         confirmDate = confirmReservationIntent.getStringExtra("reservation_date");
         confirmTime = confirmReservationIntent.getStringExtra("reservation_time");
 
+        parkingLongitude = confirmReservationIntent.getStringExtra("longitude");
+        parkingLatitude = confirmReservationIntent.getStringExtra("latitude");
+
+        parkingLotId = confirmReservationIntent.getIntExtra("lot_id", -1);
+
         reservedCity = findViewById(R.id.reserved_city);
         reservedLot = findViewById(R.id.reserved_lot);
         reservedDate = findViewById(R.id.reserved_date);
@@ -44,8 +54,12 @@ public class ConfirmReservationActivity extends AppCompatActivity {
         reservedDate.setText(confirmDate);
         reservedTime.setText(confirmTime);
 
+        // Insert reservation entry
+        insertReservation();
+
         Button navigateBtn = findViewById(R.id.navigateBtn);
         navigateBtn.setOnClickListener(v -> {
+            // TODO: Google maps navigation
             Toast.makeText(this, "Navigation opening...", Toast.LENGTH_SHORT).show();
         });
 
@@ -68,6 +82,18 @@ public class ConfirmReservationActivity extends AppCompatActivity {
 
             return true;
         });
+    }
+
+    private void insertReservation() {
+        MyDatabase handler = new MyDatabase(ConfirmReservationActivity.this);
+
+        Bundle userInfo = CurrentUserManager.getCurrentUser(ConfirmReservationActivity.this);
+        String currentUsername = userInfo.getString(CurrentUserManager.USER_KEY);
+        int currentUserId = handler.getCurrentUserId(currentUsername);
+
+        int confirmCityId = handler.getCityId(confirmCity);
+
+        handler.insertReservation(currentUserId, confirmCityId, parkingLotId, confirmDate, confirmTime);
     }
 
     @Override

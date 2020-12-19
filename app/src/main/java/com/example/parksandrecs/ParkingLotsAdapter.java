@@ -82,6 +82,7 @@ ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.ParkingLotsVi
 
                 goToConfirmReservationIntent.putExtra("city_name", city);
                 goToConfirmReservationIntent.putExtra("lot_name", currentParking.getParkingName());
+                goToConfirmReservationIntent.putExtra("lot_id", currentParking.getParkingId());
                 goToConfirmReservationIntent.putExtra("reservation_date", date);
                 goToConfirmReservationIntent.putExtra("reservation_time", time);
                 goToConfirmReservationIntent.putExtra("longitude", currentParking.getLongitude());

@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -370,6 +369,53 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
     public int getNumberOfTakenSpots(int cityId, int parkingId, String date, String time) {
-        return 0;
+        try {
+            createDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = String.format("SELECT * FROM %s WHERE " +
+                "%s='%s' AND %s='%s' AND %s='%s' AND %s='%s'",
+                RESERVATION_TABLE,
+                TableColumns.ReservationTableColumns.RESERVATION_CITY_ID_COLUMN, cityId,
+                TableColumns.ReservationTableColumns.RESERVATION_LOT_ID_COLUMN, parkingId,
+                TableColumns.ReservationTableColumns.RESERVATION_DATE_COLUMN, date,
+                TableColumns.ReservationTableColumns.RESERVATION_TIME_COLUMN, time);
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        int takenSpots = cursor.getCount();
+
+        cursor.close();
+        db.close();
+
+        return takenSpots;
+    }
+
+    public void insertReservation
+            (int currentUserId, int confirmCityId, int parkingLotId, String confirmDate, String confirmTime) {
+        try {
+            createDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+        String userId = String.valueOf(currentUserId);
+        String cityId = String.valueOf(confirmCityId);
+        String lotId = String.valueOf(parkingLotId);
+
+        String query = String.format("INSERT INTO %s " +
+                "(%s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', '%s')",
+                RESERVATION_TABLE,
+                TableColumns.ReservationTableColumns.RESERVATION_USER_ID_COLUMN,
+                TableColumns.ReservationTableColumns.RESERVATION_CITY_ID_COLUMN,
+                TableColumns.ReservationTableColumns.RESERVATION_LOT_ID_COLUMN,
+                TableColumns.ReservationTableColumns.RESERVATION_DATE_COLUMN,
+                TableColumns.ReservationTableColumns.RESERVATION_TIME_COLUMN,
+                userId, cityId, lotId, confirmDate, confirmTime);
+
+        db.execSQL(query);
     }
 }

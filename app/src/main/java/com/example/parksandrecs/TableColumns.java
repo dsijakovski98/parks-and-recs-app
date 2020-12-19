@@ -22,9 +22,8 @@ public class TableColumns {
         public static final String RESERVATION_USER_ID_COLUMN = "uid";
         public static final String RESERVATION_CITY_ID_COLUMN = "city_id";
         public static final String RESERVATION_LOT_ID_COLUMN = "lot_id";
-        public static final String RESRVATION_SPOT_ID_COLUMN = "spot_id";
-        public static final String RESERVATION_DATE_FROM_COLUMN = "date_from";
-        public static final String RESERVATION_DURATION_COLUMN = "duration";
+        public static final String RESERVATION_DATE_COLUMN = "date";
+        public static final String RESERVATION_TIME_COLUMN = "time";
     }
 
     public static class ParkingLotColumns {
@@ -38,6 +37,6 @@ public class TableColumns {
     public static class CitiesTableColumns {
         public static final String CITY_ID_COLUMN = "city_id";
         public static final String CITY_NAME_COLUMN = "city_name";
-        public static final String CITY_ACRONYM_COLUMN = "city_achronim";
+        public static final String CITY_ACRONYM_COLUMN = "city_acronym";
     }
 }
