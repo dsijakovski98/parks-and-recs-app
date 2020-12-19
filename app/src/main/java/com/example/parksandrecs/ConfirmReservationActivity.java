@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,6 +62,17 @@ public class ConfirmReservationActivity extends AppCompatActivity {
         navigateBtn.setOnClickListener(v -> {
             // TODO: Google maps navigation
             Toast.makeText(this, "Navigation opening...", Toast.LENGTH_SHORT).show();
+
+            String navigationUri = "google.navigation:q=" + parkingLatitude + "," + parkingLongitude;
+            Intent googleMapsNavigation = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(navigationUri));
+            googleMapsNavigation.setPackage("com.google.android.apps.maps");
+
+            if(googleMapsNavigation.resolveActivity(getPackageManager()) != null) {
+                startActivity(googleMapsNavigation);
+            }
+
+
         });
 
         // Setup toolbar
