@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,11 @@ public class ConfirmReservationActivity extends AppCompatActivity {
         reservedLot.setText(confirmLot);
         reservedDate.setText(confirmDate);
         reservedTime.setText(confirmTime);
+
+        Button navigateBtn = findViewById(R.id.navigateBtn);
+        navigateBtn.setOnClickListener(v -> {
+            Toast.makeText(this, "Navigation opening...", Toast.LENGTH_SHORT).show();
+        });
 
         // Setup toolbar
         Toolbar mainToolbar = findViewById(R.id.confirm_reservation_toolbar);

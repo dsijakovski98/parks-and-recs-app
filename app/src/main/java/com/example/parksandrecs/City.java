@@ -1,26 +1,26 @@
 package com.example.parksandrecs;
 
-import android.widget.ImageView;
 
 public class City {
-    private ImageView cityImg;
+    private int cityId;
     private String cityName;
-    private String cityAchronim;
-    private String avatarColor;
+    private String cityAcronym;
     private int numParkings;
+    private String avatarColor;
 
-    public City(String cityName, String cityAchronim, int numParkings) {
+    public City(int cityId, String cityName, String cityAcronym, int numParkings) {
+        this.cityId = cityId;
         this.cityName = cityName;
-        this.cityAchronim = cityAchronim;
-        this.avatarColor = "";
+        this.cityAcronym = cityAcronym;
         this.numParkings = numParkings;
+        this.avatarColor = "";
     }
 
     @Override
     public String toString() {
         return "City{" +
                 "cityName='" + cityName + '\'' +
-                ", cityAchronim='" + cityAchronim + '\'' +
+                ", cityAcronym='" + cityAcronym + '\'' +
                 ", numParkings=" + numParkings +
                 '}';
     }
@@ -41,12 +41,12 @@ public class City {
         this.numParkings = numParkings;
     }
 
-    public String getCityAchronim() {
-        return cityAchronim;
+    public String getCityAcronym() {
+        return cityAcronym;
     }
 
-    public void setCityAchronim(String cityAchronim) {
-        this.cityAchronim = cityAchronim;
+    public void setCityAcronym(String cityAcronym) {
+        this.cityAcronym = cityAcronym;
     }
 
     public String getAvatarColor() {
@@ -55,5 +55,13 @@ public class City {
 
     public void setAvatarColor(String avatarColor) {
         this.avatarColor = avatarColor;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 }

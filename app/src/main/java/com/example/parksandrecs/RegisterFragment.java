@@ -87,23 +87,38 @@ public class RegisterFragment extends Fragment {
             return;
         }
 
-        // TODO: Implement database
         // Check for existing fields
         // if username already exists, set error message
-
+        if(usernameAlreadyTaken(username)) {
+            errorInput(usernameInput, R.string.username_taken);
+            return;
+        }
         // =============================================================
-
-
         // Valid registration entry at this point
-        // 1. User persistent data
-        CurrentUserManager.logIn(usernameInput, getActivity());
 
-        // 2. Go to cities activity
+        // 1. Insert user into database
+        insertUserIntoDatabase(username, password);
+
+        // 2. User persistent data
+        CurrentUserManager.logIn(username, getActivity());
+
+        // 3. Go to cities activity
         Intent goToCitiesIntent = new Intent(getActivity(), CitiesActivity.class);
         startActivity(goToCitiesIntent);
         getActivity().finish();
     }
 
+    private void insertUserIntoDatabase(String username, String password) {
+        MyDatabase handler = new MyDatabase(getActivity());
+        handler.insertUser(username, password);
+    }
+
+    private boolean usernameAlreadyTaken(String username) {
+        MyDatabase handler = new MyDatabase(getActivity());
+        return handler.checkUsernameTaken(username);
+    }
+
+    // Form validation helper functions
     private void clearErrorInput() {
         ColorStateList colorStateList = ColorStateList.valueOf(R.attr.hintTextColor);
         usernameInput.setBackgroundTintList(colorStateList);

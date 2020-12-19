@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,6 +32,7 @@ public class MakeReservationActivity extends AppCompatActivity {
     TextView errorMessage;
 
     String selectedCityName;
+    int selectedCityId;
 
     private final String DATE_FORMAT = "MM/dd/YYYY";
 
@@ -41,6 +43,7 @@ public class MakeReservationActivity extends AppCompatActivity {
 
         Intent makeReservationIntent = getIntent();
         selectedCityName = makeReservationIntent.getStringExtra("city_name");
+        selectedCityId = makeReservationIntent.getIntExtra("city_id", -1);
         TextView cityNameTv = findViewById(R.id.reservation_city_name);
         cityNameTv.setText(selectedCityName);
 
@@ -83,6 +86,9 @@ public class MakeReservationActivity extends AppCompatActivity {
         String date = dateInput.getText().toString();
         String time = timeSlotsSpinner.getSelectedItem().toString();
 
+        // Clear previous errors
+        errorMessage.setText(R.string.empty_field);
+
         // Empty fields
         if(date.equals("")) {
             errorInput(dateInput, R.string.enter_date);
@@ -95,22 +101,51 @@ public class MakeReservationActivity extends AppCompatActivity {
             return;
         }
 
-        // Date not in the past
+        // TODO: Date must not be in the past !!!
         // 1. Get today's date
         // 2. Compare Dates
 
-        // TODO: Implement database
-        // Check time availability
+        // Check reservations cap
+        if(!reservationCapExceeded()) {
+            errorInput(dateInput, R.string.reservation_cap_exceeded);
+            return;
+        }
 
         // Valid reservation at this point
-        errorMessage.setText(R.string.empty_field);
-
-        String reservationInfo = "Date: " + date + "\n" + "Time: " + time;
-        Toast.makeText(this, "Making Reservation...:\n" + reservationInfo, Toast.LENGTH_SHORT).show();
-
         openParkingLotsFragment(date, time);
     }
 
+    private boolean reservationCapExceeded() {
+        MyDatabase handler = new MyDatabase(MakeReservationActivity.this);
+
+        Bundle currentUser = CurrentUserManager.getCurrentUser(MakeReservationActivity.this);
+        String currentUsername = currentUser.getString(CurrentUserManager.USER_KEY);
+
+        int currentUserId = handler.getCurrentUserId(currentUsername);
+
+        return handler.reservationCapExceeded(currentUserId);
+    }
+
+    private List<ParkingLot> getAllParkingLots() {
+        MyDatabase handler = new MyDatabase(MakeReservationActivity.this);
+        return handler.getAllParkingLots(selectedCityId);
+    }
+
+
+    // Open parking lots fragment function
+    private void openParkingLotsFragment(String date, String time) {
+
+        List<ParkingLot> allParkingLotsList = getAllParkingLots();
+
+        // PARKING LOTS FRAGMENT CODE
+        AppCompatActivity activity = MakeReservationActivity.this;
+        ParkingsFragment parkingsFragment =
+                new ParkingsFragment(selectedCityName, date, time, allParkingLotsList);
+        parkingsFragment.show(activity.getSupportFragmentManager(), "Parking dialog Fragment");
+    }
+
+
+    // Form validation functions
     private void errorInput(EditText input, int errorCode) {
         ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.redish));
         input.setBackgroundTintList(colorStateList);
@@ -129,30 +164,8 @@ public class MakeReservationActivity extends AppCompatActivity {
         return true;
     }
 
-    private void openParkingLotsFragment(String date, String time) {
-        // TODO: Get available parking spots from database
-        // TODO: Change name of function to getAvailableLots(city)
 
-        List<ParkingLot> availableParkingSpotsList = createParkingLotsList(selectedCityName);
-
-        // PARKING LOTS FRAGMENT CODE
-        AppCompatActivity activity = (AppCompatActivity) MakeReservationActivity.this;
-            ParkingsFragment parkingsFragment =
-                    new ParkingsFragment(selectedCityName, date, time, availableParkingSpotsList);
-            parkingsFragment.show(activity.getSupportFragmentManager(), "Parking dialog Fragment");
-    }
-
-    // TEST FUNCTION
-    private List<ParkingLot> createParkingLotsList(String cityName) {
-        List<ParkingLot> parkingLotsList = new ArrayList<>();
-
-        for(int i = 0; i < 10; i++) {
-            parkingLotsList.add((new ParkingLot(cityName + " " + i, -1, 10)));
-        }
-
-        return parkingLotsList;
-    }
-
+    // Toolbar functions
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.reservations_menu, menu);

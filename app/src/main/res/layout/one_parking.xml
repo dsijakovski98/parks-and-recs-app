@@ -24,10 +24,10 @@
         android:id="@+id/tvh_parking_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="17sp"
+        android:textSize="18sp"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toEndOf="@+id/ivh_parking_lot_icon"
         app:layout_constraintTop_toTopOf="@+id/ivh_parking_lot_icon" />
@@ -63,8 +63,7 @@
         android:id="@+id/redSquare"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:background="@color/redish"
         android:clickable="false"
         android:text="@string/empty_field"
@@ -122,10 +121,10 @@
         app:layout_constraintTop_toTopOf="@+id/greenSquare" />
 
     <View
-        android:id="@+id/divider2"
+        android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#A3848484"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

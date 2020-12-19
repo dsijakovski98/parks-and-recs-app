@@ -27,7 +27,7 @@
         android:text="@string/congrats_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirm_reservation_toolbar" />
@@ -47,8 +47,8 @@
         android:id="@+id/cityTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="24dp"
         android:text="@string/city_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/black"
@@ -72,7 +72,7 @@
         android:id="@+id/lotTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/lot_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/black"
@@ -96,10 +96,10 @@
         android:id="@+id/dateTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/date_title"
-        android:textColor="@color/black"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/lotTitle"
         app:layout_constraintTop_toBottomOf="@+id/lotTitle" />
 
@@ -120,10 +120,10 @@
         android:id="@+id/timeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/time_title"
-        android:textColor="@color/black"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/dateTitle"
         app:layout_constraintTop_toBottomOf="@+id/dateTitle" />
 
@@ -142,8 +142,8 @@
 
     <ImageView
         android:id="@+id/dontBeLate"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
         android:layout_marginBottom="8dp"
         android:src="@mipmap/ic_dont_be_late_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -152,16 +152,20 @@
 
     <Button
         android:id="@+id/navigateBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/design_default_color_primary"
         android:padding="20dp"
         android:text="@string/navigation_btn"
         android:textColor="@color/cardview_light_background"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/dontBeLate"
-        app:layout_constraintEnd_toEndOf="@+id/successfulReservation"
-        app:layout_constraintStart_toStartOf="@+id/successfulReservation"
-        app:layout_constraintTop_toBottomOf="@+id/timeTitle" />
+        app:layout_constraintEnd_toEndOf="@+id/congratsText"
+        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintStart_toStartOf="@+id/congratsText"
+        app:layout_constraintTop_toBottomOf="@+id/timeTitle"
+        app:layout_constraintVertical_bias="0.546" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

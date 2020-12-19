@@ -11,10 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesViewHolder> {
@@ -43,7 +41,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
 
         // Assign the data to the views
         holder.cityName.setText(currentCity.getCityName());
-        holder.cityAchronim.setText(currentCity.getCityAchronim());
+        holder.cityAcronym.setText(currentCity.getCityAcronym());
         holder.numParkings.setText(String.valueOf(currentCity.getNumParkings()));
 
         int[] colorsArray = context.getResources().getIntArray(R.array.avatar_colors);
@@ -61,9 +59,11 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
 
             holder.openParkingLotsBtn.setOnClickListener(v -> {
                 String selectedCityName = citiesList.get(position).getCityName();
+                int selectedCityId = citiesList.get(position).getCityId();
 
                 Intent goToReservationForm = new Intent(context, MakeReservationActivity.class);
                 goToReservationForm.putExtra("city_name", selectedCityName);
+                goToReservationForm.putExtra("city_id", selectedCityId);
 
                 context.startActivity(goToReservationForm);
         });
@@ -80,7 +80,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
 
         ImageView cityImg;
         TextView cityName;
-        TextView cityAchronim;
+        TextView cityAcronym;
         TextView numParkings;
         ImageButton openParkingLotsBtn;
 
@@ -90,7 +90,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
 
             this.cityImg = itemView.findViewById(R.id.ivh_city_img);
             this.cityName = itemView.findViewById(R.id.tvh_city_name);
-            this.cityAchronim = itemView.findViewById(R.id.tvh_city_achronim);
+            this.cityAcronym = itemView.findViewById(R.id.tvh_city_acronym);
             this.numParkings = itemView.findViewById(R.id.tvh_number_parking_lots);
             this.openParkingLotsBtn = itemView.findViewById(R.id.bvh_view_parking_lots);
         }

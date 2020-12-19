@@ -52,7 +52,7 @@
         app:layout_constraintStart_toEndOf="@+id/parking_lots" />
 
     <TextView
-        android:id="@+id/tvh_city_achronim"
+        android:id="@+id/tvh_city_acronym"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SK"

@@ -21,7 +21,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.ParkingLotsViewHolder> {
+public class
+ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.ParkingLotsViewHolder> {
     List<ParkingLot> parkingLotsList;
     String city;
     String date;
@@ -54,9 +55,8 @@ public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.
 
         int lotCapacity = currentParking.getCapacity();
 
-        // TODO: Calculate open and taken spots
-        // For now, hard code them
-        int takenSpots = 6; // TODO: getNumberOfTakenSpots(city, parkingLot, date, time)
+
+        int takenSpots = getNumberOfTakenSpots(city, currentParking.getParkingId(), date, time);
         int openSpots = lotCapacity - takenSpots;
 
         if(openSpots == 0) {
@@ -76,7 +76,7 @@ public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.
 
             holder.makeReservationBtn.setOnClickListener(v -> {
                 // Go to confirm reservation activity
-                Toast.makeText(context, "Going to ConfirmReservation activity...", Toast.LENGTH_SHORT).show();
+//              Toast.makeText(context, "Going to ConfirmReservation activity...", Toast.LENGTH_SHORT).show();
 
                 Intent goToConfirmReservationIntent = new Intent(context, ConfirmReservationActivity.class);
 
@@ -84,6 +84,8 @@ public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.
                 goToConfirmReservationIntent.putExtra("lot_name", currentParking.getParkingName());
                 goToConfirmReservationIntent.putExtra("reservation_date", date);
                 goToConfirmReservationIntent.putExtra("reservation_time", time);
+                goToConfirmReservationIntent.putExtra("longitude", currentParking.getLongitude());
+                goToConfirmReservationIntent.putExtra("latitude", currentParking.getLatitude());
 
                 context.startActivity(goToConfirmReservationIntent);
                 ((Activity)context).finish();
@@ -93,6 +95,13 @@ public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.
         holder.parkingLotTakenSpots.setText(String.valueOf(takenSpots));
         holder.parkingLotOpenSpots.setText(String.valueOf(openSpots));
 
+    }
+
+    private int getNumberOfTakenSpots(String city, int parkingId, String date, String time) {
+        MyDatabase handler = new MyDatabase(context);
+        int cityId = handler.getCityId(city);
+
+        return handler.getNumberOfTakenSpots(cityId, parkingId, date, time);
     }
 
     @Override

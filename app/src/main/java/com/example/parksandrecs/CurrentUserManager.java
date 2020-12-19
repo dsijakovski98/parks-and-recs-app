@@ -11,10 +11,8 @@ public class CurrentUserManager {
     public static String SHARED_PREFS_NAME = "userPrefs";
     public static String USER_KEY = "user_name";
     public static String LOGGED_IN_KEY = "logged_in";
-    public static String USER_DEFAULT_VALUE = "User";
 
-    public static void logIn(EditText input, Context context) {
-        String username = input.getText().toString();
+    public static void logIn(String username, Context context) {
         boolean loggedIn = true; // ?
 
         // Create shared prefs object

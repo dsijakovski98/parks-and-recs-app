@@ -71,8 +71,16 @@ public class LoginFragment extends Fragment {
         // TODO: Implement database
         // Check for existing input
         // if username exists
-        // and if password is correct, sign user in
+        if(!usernameExists(username)) {
+            errorInput(usernameInput, R.string.username_doesnt_exist);
+            return;
+        }
 
+        // and if password is correct, sign user in
+        if(!correctPassword(username, password)) {
+            errorInput(passwordInput, R.string.password_incorrect);
+            return;
+        }
         // =============================================================
 
         // Valid login at this point
@@ -83,6 +91,16 @@ public class LoginFragment extends Fragment {
         Intent goToCitiesIntent = new Intent(getActivity(), CitiesActivity.class);
         startActivity(goToCitiesIntent);
         getActivity().finish();
+    }
+
+    private boolean correctPassword(String username, String password) {
+        MyDatabase handler = new MyDatabase(getActivity());
+        return handler.checkCorrectPassword(username, password);
+    }
+
+    private boolean usernameExists(String username) {
+        MyDatabase handler = new MyDatabase(getActivity());
+        return handler.checkUsernameTaken(username);
     }
 
     private void clearErrorInput() {

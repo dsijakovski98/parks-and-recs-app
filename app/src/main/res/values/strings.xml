@@ -49,7 +49,10 @@
     <string name="time_text">Time: </string>
     <string name="enter_username">Enter a username!</string>
     <string name="enter_password">Enter a password!</string>
+    <string name="username_taken">Username already taken!</string>
+    <string name="username_doesnt_exist">Username doesn\'t exist!</string>
     <string name="short_username">Username must have at least 4 characters!</string>
+    <string name="password_incorrect">Incorrect password!</string>
     <string name="short_password">Password must have at least 6 characters!</string>
     <string name="passwords_not_matching">Passwords don\'t match!</string>
     <string name="enter_date">Enter a date!</string>
@@ -57,12 +60,14 @@
     <string name="past_time_date">Date can\'t be in the past!</string>
     <string name="congrats_text">Congratulations!</string>
     <string name="success_reservation">Your reservation was successful!</string>
+    <string name="all_reservations_taken">No open parking spot at selected date/time!</string>
     <string name="city_title">City: </string>
     <string name="lot_title">Parking lot: </string>
     <string name="date_title">Date: </string>
     <string name="time_title">Time: </string>
     <string name="open_spots_text">Open:</string>
     <string name="taken_spots_text">Taken:</string>
+    <string name="reservation_cap_exceeded">Max (3) reservations made!</string>
 
 
     <string-array name="time_slots">
