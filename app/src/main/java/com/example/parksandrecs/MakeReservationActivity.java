@@ -106,7 +106,7 @@ public class MakeReservationActivity extends AppCompatActivity {
         // 2. Compare Dates
 
         // Check reservations cap
-        if(!reservationCapExceeded()) {
+        if(reservationCapExceeded()) {
             errorInput(dateInput, R.string.reservation_cap_exceeded);
             return;
         }

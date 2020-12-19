@@ -85,7 +85,7 @@ public class LoginFragment extends Fragment {
 
         // Valid login at this point
         // 1. User persistent data
-        CurrentUserManager.logIn(usernameInput, getActivity());
+        CurrentUserManager.logIn(username, getActivity());
 
         // 2. Go to cities activity
         Intent goToCitiesIntent = new Intent(getActivity(), CitiesActivity.class);
