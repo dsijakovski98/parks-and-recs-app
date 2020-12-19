@@ -7,6 +7,7 @@ import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,12 +23,14 @@ import java.util.List;
 
 public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.ParkingLotsViewHolder> {
     List<ParkingLot> parkingLotsList;
+    String city;
     String date;
     String time;
     Context context;
 
-    public ParkingLotsAdapter(List<ParkingLot> parkingLotsList, String date, String time, Context context) {
+    public ParkingLotsAdapter(List<ParkingLot> parkingLotsList, String city, String date, String time, Context context) {
         this.parkingLotsList = parkingLotsList;
+        this.city = city;
         this.date = date;
         this.time = time;
         this.context = context;
@@ -77,7 +80,8 @@ public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.
 
                 Intent goToConfirmReservationIntent = new Intent(context, ConfirmReservationActivity.class);
 
-                goToConfirmReservationIntent.putExtra("city_name", currentParking.getParkingName());
+                goToConfirmReservationIntent.putExtra("city_name", city);
+                goToConfirmReservationIntent.putExtra("lot_name", currentParking.getParkingName());
                 goToConfirmReservationIntent.putExtra("reservation_date", date);
                 goToConfirmReservationIntent.putExtra("reservation_time", time);
 
@@ -102,7 +106,7 @@ public class ParkingLotsAdapter extends RecyclerView.Adapter<ParkingLotsAdapter.
         TextView parkingLotName;
         TextView parkingLotTakenSpots;
         TextView parkingLotOpenSpots;
-        ImageView makeReservationBtn;
+        Button makeReservationBtn;
 
         public ParkingLotsViewHolder(@NonNull View itemView) {
             super(itemView);

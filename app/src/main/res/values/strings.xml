@@ -5,6 +5,7 @@
     <string name="main_toolbar_title">Welcome</string>
     <string name="cities_toolbar_title">Cities</string>
     <string name="make_reservation_toolbar_title">Make Reservation</string>
+    <string name="confirm_reservation_toolbar_title">Confirm Reservation</string>
 
     <string name="my_reservations">My Reservations</string>
     <string name="log_out">Log out</string>
@@ -35,6 +36,7 @@
     <string name="open_city_parking_lots_btn">Open</string>
     <string name="create_reservation_btn">Reserve</string>
     <string name="make_reservation_btn">Make reservation</string>
+    <string name="navigation_btn">Navigate</string>
 
 
     <!--    OTHER-->
@@ -53,6 +55,14 @@
     <string name="enter_date">Enter a date!</string>
     <string name="invalid_date">Invalid date format!</string>
     <string name="past_time_date">Date can\'t be in the past!</string>
+    <string name="congrats_text">Congratulations!</string>
+    <string name="success_reservation">Your reservation was successful!</string>
+    <string name="city_title">City: </string>
+    <string name="lot_title">Parking lot: </string>
+    <string name="date_title">Date: </string>
+    <string name="time_title">Time: </string>
+    <string name="open_spots_text">Open:</string>
+    <string name="taken_spots_text">Taken:</string>
 
 
     <string-array name="time_slots">

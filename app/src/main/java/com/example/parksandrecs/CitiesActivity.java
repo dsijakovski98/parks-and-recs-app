@@ -19,7 +19,6 @@ import java.util.List;
 
 public class CitiesActivity extends AppCompatActivity {
 
-
     List<City> citiesList = new ArrayList<>();
 
     private String currentUserUsername;

@@ -66,7 +66,7 @@ public class ParkingsFragment extends DialogFragment {
 
         // Set the adapter
         ParkingLotsAdapter parkingLotsRecyclerViewAdapter =
-                new ParkingLotsAdapter(parkingLotsList, date, time, getActivity());
+                new ParkingLotsAdapter(parkingLotsList, cityName, date, time, getActivity());
         parkingLotsRecyclerView.setAdapter(parkingLotsRecyclerViewAdapter);
 
 

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
- <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/takenSpotsText"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF">
 
     <ImageView
         android:id="@+id/ivh_parking_lot_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="65dp"
+        android:layout_height="70dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/img_description"
         android:src="@drawable/ic_parking_lot_open_icon"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,10 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="17sp"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toEndOf="@+id/ivh_parking_lot_icon"
         app:layout_constraintTop_toTopOf="@+id/ivh_parking_lot_icon" />
 
@@ -40,55 +42,47 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/redSquare"
-        app:layout_constraintStart_toEndOf="@+id/redSquare"
-        app:layout_constraintTop_toTopOf="@+id/redSquare" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
-    <ImageView
+    <Button
         android:id="@+id/bvh_make_reservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@color/parking_lot_open"
-        android:src="@drawable/ic_reserve_btn_icon"
-        android:padding="5dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:text="@string/create_reservation_btn"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/ivh_parking_lot_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivh_parking_lot_icon" />
-
-   <View
-       android:id="@+id/divider2"
-       android:layout_width="match_parent"
-       android:layout_height="2dp"
-       android:background="?android:attr/listDivider"
-       android:backgroundTint="#000000"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/redSquare"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/redish"
         android:clickable="false"
         android:text="@string/empty_field"
-        app:layout_constraintBottom_toBottomOf="@+id/ivh_parking_lot_icon"
-        app:layout_constraintStart_toEndOf="@+id/ivh_parking_lot_icon" />
+        app:layout_constraintStart_toEndOf="@+id/ivh_parking_lot_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tvh_parking_name" />
 
     <Button
         android:id="@+id/greenSquare"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/greenish"
         android:clickable="false"
         android:text="@string/empty_field"
-        app:layout_constraintBottom_toBottomOf="@+id/ivh_parking_lot_icon"
-        app:layout_constraintStart_toEndOf="@+id/tvh_parking_spots_taken" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/redSquare"
+        app:layout_constraintTop_toBottomOf="@+id/redSquare" />
 
     <TextView
         android:id="@+id/tvh_parking_spots_open"
@@ -99,9 +93,42 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/openSpotsText"
+        app:layout_constraintStart_toEndOf="@+id/openSpotsText"
+        app:layout_constraintTop_toTopOf="@+id/openSpotsText" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/taken_spots_text"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/redSquare"
+        app:layout_constraintStart_toEndOf="@+id/redSquare"
+        app:layout_constraintTop_toTopOf="@+id/redSquare" />
+
+    <TextView
+        android:id="@+id/openSpotsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/open_spots_text"
+        android:textColor="@color/black"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/greenSquare"
         app:layout_constraintStart_toEndOf="@+id/greenSquare"
         app:layout_constraintTop_toTopOf="@+id/greenSquare" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#A3848484"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
