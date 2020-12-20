@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -102,8 +103,20 @@ public class MakeReservationActivity extends AppCompatActivity {
         }
 
         // TODO: Date must not be in the past !!!
+//        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
         // 1. Get today's date
-        // 2. Compare Dates
+//        Date todayDate = new Date();
+        // 2. Get user's date
+//        Date reservationDate = formatter.parse(date);
+
+        // 3. Compare Dates
+//        if(todayDate.after(reservationDate)) {
+//            Toast.makeText(this, date + " is before today (" + formatter.format(todayDate) + ")!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        else {
+//            Toast.makeText(this, date + " (" + formatter.format(todayDate) + ")", Toast.LENGTH_SHORT).show();
+//        }
 
         // Check reservations cap
         if(reservationCapExceeded()) {
@@ -153,8 +166,7 @@ public class MakeReservationActivity extends AppCompatActivity {
     }
 
     private boolean dateIsValid(String dateStr) {
-        DateFormat sdf;
-        sdf = new SimpleDateFormat(DATE_FORMAT);
+        DateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         sdf.setLenient(false);
         try {
             sdf.parse(dateStr);

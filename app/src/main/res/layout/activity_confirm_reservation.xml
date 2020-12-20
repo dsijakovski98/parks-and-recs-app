@@ -141,11 +141,11 @@
         app:layout_constraintTop_toTopOf="@+id/timeTitle" />
 
     <ImageView
-        android:id="@+id/dontBeLate"
-        android:layout_width="190dp"
-        android:layout_height="190dp"
+        android:id="@+id/qrImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginBottom="8dp"
-        android:src="@mipmap/ic_dont_be_late_foreground"
+        app:srcCompat="@android:drawable/screen_background_dark_transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -161,7 +161,7 @@
         android:text="@string/navigation_btn"
         android:textColor="@color/cardview_light_background"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/dontBeLate"
+        app:layout_constraintBottom_toTopOf="@+id/qrImage"
         app:layout_constraintEnd_toEndOf="@+id/congratsText"
         app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="@+id/congratsText"

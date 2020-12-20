@@ -4,13 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidmads.library.qrgenearator.QRGContents;
+import androidmads.library.qrgenearator.QRGEncoder;
 
 public class ConfirmReservationActivity extends AppCompatActivity {
 
@@ -28,6 +34,8 @@ public class ConfirmReservationActivity extends AppCompatActivity {
     TextView reservedTime;
 
     int parkingLotId;
+
+    ImageView qrImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +58,25 @@ public class ConfirmReservationActivity extends AppCompatActivity {
         reservedDate = findViewById(R.id.reserved_date);
         reservedTime = findViewById(R.id.reserved_time);
 
+        qrImage = findViewById(R.id.qrImage);
+
         reservedCity.setText(confirmCity);
         reservedLot.setText(confirmLot);
         reservedDate.setText(confirmDate);
         reservedTime.setText(confirmTime);
+
+        // Create qr code
+        // "geo:lat(numerical value),long(numerical value)"
+        String qrUri = String.format("geo:%s,%s", parkingLatitude, parkingLongitude);
+        QRGEncoder qrgEncoder = new QRGEncoder(qrUri, null, QRGContents.Type.TEXT, 500);
+        qrgEncoder.setColorBlack(Color.BLACK);
+        qrgEncoder.setColorWhite(Color.WHITE);
+        try {
+            Bitmap qrBitmap = qrgEncoder.getBitmap();
+            qrImage.setImageBitmap(qrBitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Insert reservation entry
         insertReservation();
