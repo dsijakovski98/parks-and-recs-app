@@ -8,12 +8,15 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -105,7 +108,7 @@ public class ConfirmReservationActivity extends AppCompatActivity {
         mainToolbar.setOnMenuItemClickListener(item -> {
 
             if(item.getItemId() == R.id.my_reservations_item) {
-                Toast.makeText(ConfirmReservationActivity.this, "Reservations clicked", Toast.LENGTH_SHORT).show();
+                openMyReservations();
             }
             else if(item.getItemId() == R.id.log_out_item) {
                 CurrentUserManager.logOut(ConfirmReservationActivity.this);
@@ -117,6 +120,12 @@ public class ConfirmReservationActivity extends AppCompatActivity {
 
             return true;
         });
+    }
+
+    private void openMyReservations() {
+        // Open my reservations activity
+        Intent myReservationsIntent = new Intent(ConfirmReservationActivity.this, MyReservationsActivity.class);
+        startActivity(myReservationsIntent);
     }
 
     private void insertReservation() {

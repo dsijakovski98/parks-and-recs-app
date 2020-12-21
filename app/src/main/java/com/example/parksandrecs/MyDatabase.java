@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Bundle;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -103,15 +105,139 @@ public class MyDatabase extends SQLiteOpenHelper {
         super.close();
     }
 
-    public void customFunction() {
+    public List<Bundle> getReservationsInfo(String userId) {
         try {
             createDatabase();
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        SQLiteDatabase db = this.getWritableDatabase();
-        // custom code here
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Bundle> returnList = new ArrayList<>();
+
+        String query = String.format("SELECT %s, %s, %s, %s FROM %s WHERE %s='%s'",
+                TableColumns.ReservationTableColumns.RESERVATION_CITY_ID_COLUMN,
+                TableColumns.ReservationTableColumns.RESERVATION_LOT_ID_COLUMN,
+                TableColumns.ReservationTableColumns.RESERVATION_DATE_COLUMN,
+                TableColumns.ReservationTableColumns.RESERVATION_TIME_COLUMN,
+                RESERVATION_TABLE,
+                TableColumns.ReservationTableColumns.RESERVATION_USER_ID_COLUMN, userId);
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        while(cursor.moveToNext()) {
+            Bundle reservationInfo = new Bundle();
+
+            // Get city id
+            int cityId = cursor.getInt(0);
+
+            // Get lot id
+            int lotId = cursor.getInt(1);
+
+            // Get date
+            String reservationDate = cursor.getString(2);
+
+            // Get time
+            String reservationTime = cursor.getString(3);
+
+            reservationInfo.putInt("city_id", cityId);
+            reservationInfo.putInt("lot_id", lotId);
+            reservationInfo.putString("date", reservationDate);
+            reservationInfo.putString("time", reservationTime);
+
+            returnList.add(reservationInfo);
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }
+
+    public Bundle getGeoLocation(String lotName) {
+        try {
+            createDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Bundle geoLocation = new Bundle();
+
+        String query = String.format("SELECT %s, %s FROM %s WHERE %s='%s'",
+                TableColumns.ParkingLotColumns.PARKING_LOT_LATITUDE_COLUMN,
+                TableColumns.ParkingLotColumns.PARKING_LOT_LONGITUDE_COLUMN,
+                PARKING_LOT_TABLE,
+                TableColumns.ParkingLotColumns.PARKING_LOT_NAME_COLUMN, lotName);
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            float latFloat = cursor.getFloat(0);
+            float longFloat = cursor.getFloat(1);
+
+            String latitude = String.valueOf(latFloat);
+            String longitude = String.valueOf(longFloat);
+
+            geoLocation.putString("latitude", latitude);
+            geoLocation.putString("longitude", longitude);
+        }
+
+        cursor.close();
+        db.close();
+
+        return geoLocation;
+    }
+
+    public String getParkingLotName(String lotId) {
+        try {
+            createDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = String.format("SELECT %s FROM %s WHERE %s='%s'",
+                TableColumns.ParkingLotColumns.PARKING_LOT_NAME_COLUMN, PARKING_LOT_TABLE,
+                TableColumns.ParkingLotColumns.PARKING_LOT_ID_COLUMN, lotId);
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        String parkingLotName = "unknown";
+
+        if(cursor.moveToFirst()) {
+            parkingLotName = cursor.getString(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return parkingLotName;
+    }
+
+    public String getCityName(String cityId) {
+        try {
+            createDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = String.format("SELECT %s FROM %s WHERE %s='%s'",
+                TableColumns.CitiesTableColumns.CITY_NAME_COLUMN, CITIES_TABLE,
+                TableColumns.CitiesTableColumns.CITY_ID_COLUMN, cityId);
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        String cityName = "unknown";
+
+        if(cursor.moveToFirst()) {
+            cityName = cursor.getString(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return cityName;
     }
 
     public int getCurrentUserId(String username) {
@@ -418,4 +544,5 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         db.execSQL(query);
     }
+
 }

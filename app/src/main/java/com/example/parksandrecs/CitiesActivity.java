@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.Toast;
@@ -33,7 +34,8 @@ public class CitiesActivity extends AppCompatActivity {
         mainToolbar.setOnMenuItemClickListener(item -> {
 
             if(item.getItemId() == R.id.my_reservations_item) {
-                Toast.makeText(CitiesActivity.this, "Reservations clicked", Toast.LENGTH_SHORT).show();
+                Log.i("TAGG", "reservations clicked");
+                openMyReservations();
             }
             else if(item.getItemId() == R.id.log_out_item) {
                 CurrentUserManager.logOut(CitiesActivity.this);
@@ -68,6 +70,12 @@ public class CitiesActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Welcome, " + currentUserUsername, Toast.LENGTH_SHORT).show();
 
+    }
+
+    private void openMyReservations() {
+        // Open my reservations activity
+        Intent myReservationsIntent = new Intent(CitiesActivity.this, MyReservationsActivity.class);
+        startActivity(myReservationsIntent);
     }
 
     private List<City> getCitiesList() {

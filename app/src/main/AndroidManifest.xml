@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.parksandrecs">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_splash_screen_2_foreground"
@@ -10,7 +11,8 @@
         android:roundIcon="@mipmap/ic_splash_screen_2_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ConfirmReservationActivity"></activity>
+        <activity android:name=".MyReservationsActivity"></activity>
+        <activity android:name=".ConfirmReservationActivity" />
         <activity android:name=".MakeReservationActivity" />
         <activity android:name=".CitiesActivity" />
         <activity android:name=".LoginRegisterActivity" />

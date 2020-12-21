@@ -56,7 +56,7 @@ public class MakeReservationActivity extends AppCompatActivity {
         mainToolbar.setOnMenuItemClickListener(item -> {
 
             if(item.getItemId() == R.id.my_reservations_item) {
-                Toast.makeText(MakeReservationActivity.this, "Reservations clicked", Toast.LENGTH_SHORT).show();
+                openMyReservations();
             }
             else if(item.getItemId() == R.id.log_out_item) {
                 CurrentUserManager.logOut(MakeReservationActivity.this);
@@ -81,6 +81,12 @@ public class MakeReservationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void openMyReservations() {
+        // Open my reservations activity
+        Intent myReservationsIntent = new Intent(MakeReservationActivity.this, MyReservationsActivity.class);
+        startActivity(myReservationsIntent);
     }
 
     private void validateReservation() throws ParseException {
