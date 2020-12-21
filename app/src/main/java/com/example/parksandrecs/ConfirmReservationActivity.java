@@ -46,6 +46,31 @@ public class ConfirmReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirm_reservation);
 
         Intent confirmReservationIntent = getIntent();
+        confirmReservation(confirmReservationIntent);
+
+        // Setup toolbar
+        Toolbar mainToolbar = findViewById(R.id.confirm_reservation_toolbar);
+        setSupportActionBar(mainToolbar);
+        // Toolbar items click listener
+        mainToolbar.setOnMenuItemClickListener(item -> {
+
+            if(item.getItemId() == R.id.my_reservations_item) {
+                openMyReservations();
+            }
+            else if(item.getItemId() == R.id.log_out_item) {
+                CurrentUserManager.logOut(ConfirmReservationActivity.this);
+
+                Intent goToLoginScreen = new Intent(ConfirmReservationActivity.this, LoginRegisterActivity.class);
+                startActivity(goToLoginScreen);
+                finish();
+            }
+
+            return true;
+        });
+    }
+
+    private void confirmReservation(Intent confirmReservationIntent) {
+
         confirmCity = confirmReservationIntent.getStringExtra("city_name");
         confirmLot = confirmReservationIntent.getStringExtra("lot_name");
         confirmDate = confirmReservationIntent.getStringExtra("reservation_date");
@@ -98,26 +123,6 @@ public class ConfirmReservationActivity extends AppCompatActivity {
 
 
         });
-
-        // Setup toolbar
-        Toolbar mainToolbar = findViewById(R.id.confirm_reservation_toolbar);
-        setSupportActionBar(mainToolbar);
-        // Toolbar items click listener
-        mainToolbar.setOnMenuItemClickListener(item -> {
-
-            if(item.getItemId() == R.id.my_reservations_item) {
-                openMyReservations();
-            }
-            else if(item.getItemId() == R.id.log_out_item) {
-                CurrentUserManager.logOut(ConfirmReservationActivity.this);
-
-                Intent goToLoginScreen = new Intent(ConfirmReservationActivity.this, LoginRegisterActivity.class);
-                startActivity(goToLoginScreen);
-                finish();
-            }
-
-            return true;
-        });
     }
 
     private void openMyReservations() {
@@ -135,7 +140,9 @@ public class ConfirmReservationActivity extends AppCompatActivity {
 
         int confirmCityId = handler.getCityId(confirmCity);
 
-        handler.insertReservation(currentUserId, confirmCityId, parkingLotId, confirmDate, confirmTime);
+        if(!handler.reservationExists(currentUserId, confirmCityId, parkingLotId, confirmDate, confirmTime)) {
+            handler.insertReservation(currentUserId, confirmCityId, parkingLotId, confirmDate, confirmTime);
+        }
     }
 
     @Override

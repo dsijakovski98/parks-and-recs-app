@@ -573,4 +573,36 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         db.close();
     }
+
+    public boolean reservationExists(int currentUserId, int confirmCityId, int parkingLotId, String confirmDate, String confirmTime) {
+        try {
+            createDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String userIdString = String.valueOf(currentUserId);
+        String cityIdString = String.valueOf(confirmCityId);
+        String lotIdString = String.valueOf(parkingLotId);
+
+        String query = String.format("SELECT * FROM %s WHERE " +
+                "%s='%s' AND %s='%s' AND %s='%s' AND %s='%s' AND %s='%s'",
+                RESERVATION_TABLE,
+                TableColumns.ReservationTableColumns.RESERVATION_USER_ID_COLUMN, userIdString,
+                TableColumns.ReservationTableColumns.RESERVATION_CITY_ID_COLUMN, cityIdString,
+                TableColumns.ReservationTableColumns.RESERVATION_LOT_ID_COLUMN, lotIdString,
+                TableColumns.ReservationTableColumns.RESERVATION_DATE_COLUMN, confirmDate,
+                TableColumns.ReservationTableColumns.RESERVATION_TIME_COLUMN, confirmTime);
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        boolean reservationExists = cursor.getCount() > 0;
+
+        cursor.close();
+        db.close();
+
+        return reservationExists;
+
+    }
 }
