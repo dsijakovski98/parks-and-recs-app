@@ -188,7 +188,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         return geoLocation;
     }
 
-    public String getParkingLotName(String lotId) {
+    public String getParkingLotName(String lotId, String cityId) {
         try {
             createDatabase();
         } catch (Exception e) {
@@ -196,9 +196,10 @@ public class MyDatabase extends SQLiteOpenHelper {
         }
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String query = String.format("SELECT %s FROM %s WHERE %s='%s'",
+        String query = String.format("SELECT %s FROM %s WHERE %s='%s' AND %s='%s'",
                 TableColumns.ParkingLotColumns.PARKING_LOT_NAME_COLUMN, PARKING_LOT_TABLE,
-                TableColumns.ParkingLotColumns.PARKING_LOT_ID_COLUMN, lotId);
+                TableColumns.ParkingLotColumns.PARKING_LOT_ID_COLUMN, lotId,
+                TableColumns.ParkingLotColumns.PARKING_LOT_CITY_ID_COLUMN, cityId);
 
         Cursor cursor = db.rawQuery(query, null);
 

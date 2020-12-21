@@ -32,7 +32,7 @@ public class ReservationsGetter {
             String reservationTime = reservationInfo.getString("time");
 
             String cityName = handler.getCityName(String.valueOf(cityId));
-            String parkingLotName = handler.getParkingLotName(String.valueOf(lotId));
+            String parkingLotName = handler.getParkingLotName(String.valueOf(lotId), String.valueOf(cityId));
 
             Bundle reservationLocation = handler.getGeoLocation(parkingLotName);
 
