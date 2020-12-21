@@ -68,6 +68,8 @@
     <string name="open_spots_text">Open:</string>
     <string name="taken_spots_text">Taken:</string>
     <string name="reservation_cap_exceeded">Max (3) reservations made!</string>
+    <string name="finish_reservation">Finish</string>
+    <string name="qr_code">QR code</string>
 
 
     <string-array name="time_slots">
@@ -96,5 +98,8 @@
         <item>22:00</item>
         <item>23:00</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="scan_qr_code">Scan QR Code</string>
 
 </resources>

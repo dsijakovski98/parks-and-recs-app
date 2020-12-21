@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvh_reservation_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="Skopje"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvh_reservation_lot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Skopje 1"
+        android:textColor="@color/dark_gray"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tvh_reservation_city"
+        app:layout_constraintTop_toBottomOf="@+id/tvh_reservation_city" />
+
+    <TextView
+        android:id="@+id/tvh_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/time_title"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvh_date_text"
+        app:layout_constraintTop_toBottomOf="@+id/tvh_date_text" />
+
+    <TextView
+        android:id="@+id/tvh_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/date_title"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvh_reservation_lot"
+        app:layout_constraintTop_toBottomOf="@+id/tvh_reservation_lot" />
+
+    <TextView
+        android:id="@+id/tvh_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="TextView"
+        android:textColor="@color/dark_gray"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvh_time_text"
+        app:layout_constraintStart_toEndOf="@+id/tvh_date_text"
+        app:layout_constraintTop_toTopOf="@+id/tvh_date_text" />
+
+    <TextView
+        android:id="@+id/tvh_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="TextView"
+        android:textColor="@color/dark_gray"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvh_time_text"
+        app:layout_constraintStart_toEndOf="@+id/tvh_time_text"
+        app:layout_constraintTop_toTopOf="@+id/tvh_time_text" />
+
+    <Button
+        android:id="@+id/tvh_finish_reservation_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#191760"
+        android:padding="18dp"
+        android:text="@string/finish_reservation"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="@+id/tvh_time_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvh_time"
+        app:layout_constraintTop_toTopOf="@+id/tvh_date_text" />
+
+    <Button
+        android:id="@+id/tvh_navigate_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/navigation_btn"
+        android:textSize="15sp"
+        android:padding="18dp"
+        android:backgroundTint="@color/purple_700"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintEnd_toStartOf="@+id/tvh_qr_code_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvh_time_text" />
+
+    <Button
+        android:id="@+id/tvh_qr_code_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_500"
+        android:text="@string/qr_code"
+        android:padding="18dp"
+        android:textSize="15sp"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintEnd_toEndOf="@+id/tvh_finish_reservation_btn"
+        app:layout_constraintStart_toStartOf="@+id/tvh_finish_reservation_btn"
+        app:layout_constraintTop_toTopOf="@+id/tvh_navigate_btn" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvh_navigate_btn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

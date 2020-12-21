@@ -69,9 +69,9 @@ public class ConfirmReservationActivity extends AppCompatActivity {
         reservedTime.setText(confirmTime);
 
         // Create qr code
-        // "geo:lat(numerical value),long(numerical value)"
+        // "geo:latitude,longitude"
         String qrUri = String.format("geo:%s,%s", parkingLatitude, parkingLongitude);
-        QRGEncoder qrgEncoder = new QRGEncoder(qrUri, null, QRGContents.Type.TEXT, 500);
+        QRGEncoder qrgEncoder = new QRGEncoder(qrUri, null, QRGContents.Type.TEXT, 600);
         qrgEncoder.setColorBlack(Color.BLACK);
         qrgEncoder.setColorWhite(Color.WHITE);
         try {
@@ -86,8 +86,6 @@ public class ConfirmReservationActivity extends AppCompatActivity {
 
         Button navigateBtn = findViewById(R.id.navigateBtn);
         navigateBtn.setOnClickListener(v -> {
-            // TODO: Google maps navigation
-            Toast.makeText(this, "Navigation opening...", Toast.LENGTH_SHORT).show();
 
             String navigationUri = "google.navigation:q=" + parkingLatitude + "," + parkingLongitude;
             Intent googleMapsNavigation = new Intent(Intent.ACTION_VIEW,

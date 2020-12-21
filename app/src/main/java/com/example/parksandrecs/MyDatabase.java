@@ -543,6 +543,33 @@ public class MyDatabase extends SQLiteOpenHelper {
                 userId, cityId, lotId, confirmDate, confirmTime);
 
         db.execSQL(query);
+
+        db.close();
     }
 
+    public void removeReservation(int currentUserId, int cityId, int lotId, String date, String time) {
+        try {
+            createDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String userIdString = String.valueOf(currentUserId);
+        String cityIdString = String.valueOf(cityId);
+        String lotIdString = String.valueOf(lotId);
+
+        String query = String.format("DELETE FROM %s WHERE " +
+                "%s='%s' AND %s='%s' AND %s='%s' AND %s='%s'",
+                RESERVATION_TABLE,
+                TableColumns.ReservationTableColumns.RESERVATION_USER_ID_COLUMN, userIdString,
+                TableColumns.ReservationTableColumns.RESERVATION_CITY_ID_COLUMN, cityIdString,
+                TableColumns.ReservationTableColumns.RESERVATION_LOT_ID_COLUMN, lotIdString,
+                TableColumns.ReservationTableColumns.RESERVATION_DATE_COLUMN, date,
+                TableColumns.ReservationTableColumns.RESERVATION_TIME_COLUMN, time);
+
+        db.execSQL(query);
+
+        db.close();
+    }
 }

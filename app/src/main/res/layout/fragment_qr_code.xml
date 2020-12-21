@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ParkingsFragment">
+    tools:context=".QrCodeFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,19 +19,21 @@
             android:id="@+id/tv_reservation_qr_code_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:background="@color/design_default_color_primary_variant"
             android:paddingHorizontal="10dp"
             android:paddingVertical="14dp"
-            android:textColor="@color/cardview_light_background"
-            android:background="@color/design_default_color_primary_variant"
+            android:text="@string/scan_qr_code"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/cardview_light_background"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_parking_lots"
+        <ImageView
+            android:id="@+id/reservationQrImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:srcCompat="@android:drawable/screen_background_dark_transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,5 +41,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

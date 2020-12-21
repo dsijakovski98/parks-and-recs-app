@@ -160,7 +160,7 @@ public class MakeReservationActivity extends AppCompatActivity {
         AppCompatActivity activity = MakeReservationActivity.this;
         ParkingsFragment parkingsFragment =
                 new ParkingsFragment(selectedCityName, date, time, allParkingLotsList);
-        parkingsFragment.show(activity.getSupportFragmentManager(), "Parking dialog Fragment");
+        parkingsFragment.show(activity.getSupportFragmentManager(), "Parking Fragment Dialog");
     }
 
 

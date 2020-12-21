@@ -70,7 +70,7 @@ public class ParkingsFragment extends DialogFragment {
         parkingLotsRecyclerView.setAdapter(parkingLotsRecyclerViewAdapter);
 
 
-        TextView cityName = getDialog().findViewById(R.id.tv_reservation_city_name);
+        TextView cityName = getDialog().findViewById(R.id.tv_reservation_qr_code_title);
         cityName.setText("Parking lots in " + this.cityName);
     }
 }
