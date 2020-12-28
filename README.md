@@ -1,4 +1,4 @@
-<img src="./pics/App Logo.png" align="left" style="height: 60px; margin-right:5px"/>
+<img src="./pics/App Logo.png" align="left" style="height: 20px; margin-right:5px"/>
 
 
 
